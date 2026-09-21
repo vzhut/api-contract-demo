@@ -10,7 +10,7 @@ describe('runs API', () => {
 
     const fetched = await app.inject({ method: 'GET', url: `/runs/${id}` });
     expect(fetched.statusCode).toBe(200);
-    expect(fetched.json()).toMatchObject({ id, pr_number: 7, status: 'queued', cost_usd: 0 });
+    expect(fetched.json()).toMatchObject({ id, pr_number: 7, status: 'queued', cost_usd: 0, findings_count: null });
   });
 
   it('returns 404 for an unknown run', async () => {
