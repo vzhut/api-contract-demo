@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 /** Public wire contract for review runs. JSON, snake_case. Consumed by the web client and third-party CLIs. */
-export const RunStatus = z.enum(['queued', 'running', 'done', 'failed']);
+export const RunStatus = z.enum(['queued', 'running', 'done', 'failed', 'cancelled']);
 
 export const RunResponse = z.object({
   id: z.string().uuid(),
