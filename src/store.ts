@@ -11,7 +11,7 @@ export function createRun(prNumber: number): RunResponse {
     cost_usd: 0,
     tokens_in: 0,
     tokens_out: 0,
-    findings_count: 0,
+    findings_count: null,
   };
   runs.set(run.id, run);
   return run;
