@@ -7,9 +7,8 @@ export const RunResponse = z.object({
   id: z.string().uuid(),
   pr_number: z.number().int(),
   status: RunStatus,
-  cost_usd: z.number(),
+  costUsd: z.number(),
   tokens_in: z.number().int(),
-  tokens_out: z.number().int(),
   findings_count: z.number().int(),
 });
 export type RunResponse = z.infer<typeof RunResponse>;

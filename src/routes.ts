@@ -6,7 +6,7 @@ import { createRun, getRun } from './store.js';
 
 /**
  *   POST /runs      → 201, RunResponse
- *   GET  /runs/:id  → 200 RunResponse | 404 { error }
+ *   GET  /v2/runs/:runId → 200 RunResponse | 404 { error }
  */
 export async function runsRoutes(appBase: FastifyInstance) {
   const app = appBase.withTypeProvider<ZodTypeProvider>();
@@ -21,15 +21,15 @@ export async function runsRoutes(appBase: FastifyInstance) {
   );
 
   app.get(
-    '/runs/:id',
+    '/v2/runs/:runId',
     {
       schema: {
-        params: z.object({ id: z.string().uuid() }),
+        params: z.object({ runId: z.string().uuid() }),
         response: { 200: RunResponse, 404: z.object({ error: z.string() }) },
       },
     },
     async (req, reply) => {
-      const run = getRun(req.params.id);
+      const run = getRun(req.params.runId);
       if (!run) return reply.status(404).send({ error: 'run not found' });
       return run;
     },

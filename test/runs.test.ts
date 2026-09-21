@@ -8,14 +8,14 @@ describe('runs API', () => {
     expect(created.statusCode).toBe(201);
     const { id } = created.json();
 
-    const fetched = await app.inject({ method: 'GET', url: `/runs/${id}` });
+    const fetched = await app.inject({ method: 'GET', url: `/v2/runs/${id}` });
     expect(fetched.statusCode).toBe(200);
-    expect(fetched.json()).toMatchObject({ id, pr_number: 7, status: 'queued', cost_usd: 0 });
+    expect(fetched.json()).toMatchObject({ id, pr_number: 7, status: 'queued', costUsd: 0 });
   });
 
   it('returns 404 for an unknown run', async () => {
     const app = buildApp();
-    const res = await app.inject({ method: 'GET', url: '/runs/00000000-0000-4000-8000-000000000000' });
+    const res = await app.inject({ method: 'GET', url: '/v2/runs/00000000-0000-4000-8000-000000000000' });
     expect(res.statusCode).toBe(404);
   });
 });
