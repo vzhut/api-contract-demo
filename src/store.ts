@@ -8,9 +8,8 @@ export function createRun(prNumber: number): RunResponse {
     id: randomUUID(),
     pr_number: prNumber,
     status: 'queued',
-    cost_usd: 0,
+    costUsd: 0,
     tokens_in: 0,
-    tokens_out: 0,
     findings_count: 0,
   };
   runs.set(run.id, run);
