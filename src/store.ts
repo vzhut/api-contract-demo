@@ -24,6 +24,8 @@ export function getRun(id: string): RunResponse | undefined {
 export function cancelRun(id: string): RunResponse | undefined {
   const run = runs.get(id);
   if (!run) return undefined;
-  run.status = 'cancelled';
-  return run;
+  if (run.status === 'done' || run.status === 'failed' || run.status === 'cancelled') return run;
+  const cancelled: RunResponse = { ...run, status: 'cancelled' };
+  runs.set(id, cancelled);
+  return cancelled;
 }
