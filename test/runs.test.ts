@@ -18,4 +18,12 @@ describe('runs API', () => {
     const res = await app.inject({ method: 'GET', url: '/runs/00000000-0000-4000-8000-000000000000' });
     expect(res.statusCode).toBe(404);
   });
+
+  it('cancels a run', async () => {
+    const app = buildApp();
+    const { id } = (await app.inject({ method: 'POST', url: '/runs', payload: { pr_number: 3 } })).json();
+    const res = await app.inject({ method: 'POST', url: `/runs/${id}/cancel` });
+    expect(res.statusCode).toBe(200);
+    expect(res.json().status).toBe('cancelled');
+  });
 });

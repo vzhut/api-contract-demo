@@ -20,3 +20,12 @@ export function createRun(prNumber: number): RunResponse {
 export function getRun(id: string): RunResponse | undefined {
   return runs.get(id);
 }
+
+export function cancelRun(id: string): RunResponse | undefined {
+  const run = runs.get(id);
+  if (!run) return undefined;
+  if (run.status === 'done' || run.status === 'failed' || run.status === 'cancelled') return run;
+  const cancelled: RunResponse = { ...run, status: 'cancelled' };
+  runs.set(id, cancelled);
+  return cancelled;
+}
